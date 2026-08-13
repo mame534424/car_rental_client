@@ -106,7 +106,7 @@ export function CarImage({
         />
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-          <div className="absolute inset-0 opacity-50 [background:radial-gradient(circle_at_50%_40%,rgba(59,130,246,0.22),transparent_62%)]" />
+          <div className="absolute inset-0 opacity-50 [background:radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.14),transparent_62%)]" />
           <CarIcon className="relative w-10 h-10 text-blue-500/70" />
           {label && (
             <span className="relative px-4 text-center text-xs font-medium text-slate-400 line-clamp-1">

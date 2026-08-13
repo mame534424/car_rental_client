@@ -57,8 +57,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   // hold on a neutral splash rather than flashing the protected shell.
   if (loading || !admin) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#0B1120]">
-        <Spinner className="h-8 w-8 text-blue-500" />
+      <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a]">
+        <Spinner className="h-8 w-8 text-neutral-300" />
       </div>
     );
   }
@@ -124,9 +124,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   );
 
   return (
-    <div className="min-h-screen bg-[#0B1120] text-slate-100">
+    <div className="min-h-screen bg-[#0a0a0a] text-slate-100">
       {/* Desktop sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-slate-800 bg-[#0D1526] px-4 py-6 lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-slate-800 bg-[#111111] px-4 py-6 lg:flex">
         <div className="px-1.5">{Brand}</div>
         <div className="mt-8 flex-1">
           <NavItems />
@@ -135,7 +135,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </aside>
 
       {/* Mobile top bar */}
-      <div className="sticky top-0 z-30 flex items-center justify-between border-b border-slate-800 bg-[#0D1526]/95 px-4 py-3 backdrop-blur lg:hidden">
+      <div className="sticky top-0 z-30 flex items-center justify-between border-b border-slate-800 bg-[#111111]/95 px-4 py-3 backdrop-blur lg:hidden">
         {Brand}
         <button
           onClick={() => setMobileOpen(true)}
@@ -150,7 +150,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
-          <div className="absolute inset-y-0 left-0 flex w-72 max-w-[85%] flex-col border-r border-slate-800 bg-[#0D1526] px-4 py-6">
+          <div className="absolute inset-y-0 left-0 flex w-72 max-w-[85%] flex-col border-r border-slate-800 bg-[#111111] px-4 py-6">
             <div className="flex items-center justify-between px-1.5">
               {Brand}
               <button

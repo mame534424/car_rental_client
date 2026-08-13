@@ -25,9 +25,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<Variant, string> = {
   primary:
-    'bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white shadow-lg shadow-blue-600/25',
+    'bg-neutral-50 text-neutral-950 hover:bg-white border border-white/90 shadow-lg shadow-black/30',
   secondary: 'bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700',
-  danger: 'bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/20',
+  danger: 'bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/25',
   ghost: 'text-slate-300 hover:text-white hover:bg-slate-800/70',
 };
 
@@ -43,7 +43,7 @@ export function Button({
   return (
     <button
       className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50',
+        'inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40',
         variantStyles[variant],
         className
       )}
@@ -59,7 +59,7 @@ export function Button({
 /* --------------------------------- Fields -------------------------------- */
 
 const inputBase =
-  'w-full rounded-xl bg-slate-900/60 border border-slate-700 px-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/40 transition-colors disabled:opacity-60';
+  'w-full rounded-xl bg-slate-900/60 border border-slate-700 px-3.5 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-white/50 focus:ring-1 focus:ring-white/15 transition-colors disabled:opacity-60';
 
 export function Field({
   label,
@@ -163,7 +163,7 @@ export function Modal({
         role="dialog"
         aria-modal="true"
         className={cn(
-          'relative z-10 my-8 w-full rounded-2xl border border-slate-700/70 bg-[#131C2E] shadow-2xl shadow-black/50',
+          'relative z-10 my-8 w-full rounded-2xl border border-slate-700/70 bg-[#171717] shadow-2xl shadow-black/50',
           maxW
         )}
       >

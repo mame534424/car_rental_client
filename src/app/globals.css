@@ -1,38 +1,209 @@
 @import "tailwindcss";
 
 /*
-  Lumen — "Refined Dark · Sapphire"
-  One electric-blue accent (#3B82F6) over calm navy neutrals.
-  Color carries meaning: blue = brand/interactive, emerald/amber/rose = status only.
+  Lumen — "Monochrome · Premium"
+  A black & white design system where the ONLY color is meaningful status
+  feedback: success = green, warning = amber, danger = red. The brand and all
+  decorative hues (blue/sky/indigo/cyan/violet/purple/teal/pink/orange) are
+  remapped to a neutral grayscale ramp below, so the existing markup renders in
+  a cohesive palette without structural changes. Emphasis is carried by
+  contrast, weight, translucency and subtle glass — color is reserved for state.
 */
+
+@theme {
+  /* Typography */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular,
+    Menlo, monospace;
+
+  /* ----------------------------------------------------------------------
+     Neutral grayscale ramp — the single source of truth for the whole UI.
+     ------------------------------------------------------------------- */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
+
+  /* Slate / gray / zinc → true hueless grayscale (removes the old navy tint) */
+  --color-slate-50: #fafafa;
+  --color-slate-100: #f5f5f5;
+  --color-slate-200: #e5e5e5;
+  --color-slate-300: #d4d4d4;
+  --color-slate-400: #a3a3a3;
+  --color-slate-500: #737373;
+  --color-slate-600: #525252;
+  --color-slate-700: #404040;
+  --color-slate-800: #262626;
+  --color-slate-900: #171717;
+  --color-slate-950: #0a0a0a;
+
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #a3a3a3;
+  --color-gray-500: #737373;
+  --color-gray-600: #525252;
+  --color-gray-700: #404040;
+  --color-gray-800: #262626;
+  --color-gray-900: #171717;
+  --color-gray-950: #0a0a0a;
+
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f5f5f5;
+  --color-zinc-200: #e5e5e5;
+  --color-zinc-300: #d4d4d4;
+  --color-zinc-400: #a3a3a3;
+  --color-zinc-500: #737373;
+  --color-zinc-600: #525252;
+  --color-zinc-700: #404040;
+  --color-zinc-800: #262626;
+  --color-zinc-900: #171717;
+  --color-zinc-950: #0a0a0a;
+
+  /* --- Brand / interactive hue (blue, sky, indigo, cyan, violet, purple) --- */
+  --color-blue-50: #fafafa;
+  --color-blue-100: #f5f5f5;
+  --color-blue-200: #e5e5e5;
+  --color-blue-300: #e5e5e5;
+  --color-blue-400: #d4d4d4;
+  --color-blue-500: #a3a3a3;
+  --color-blue-600: #525252;
+  --color-blue-700: #404040;
+  --color-blue-800: #262626;
+  --color-blue-900: #171717;
+  --color-blue-950: #0a0a0a;
+
+  --color-sky-100: #f5f5f5;
+  --color-sky-200: #e5e5e5;
+  --color-sky-300: #e5e5e5;
+  --color-sky-400: #d4d4d4;
+  --color-sky-500: #a3a3a3;
+  --color-sky-600: #525252;
+  --color-sky-700: #404040;
+
+  --color-indigo-300: #e5e5e5;
+  --color-indigo-400: #d4d4d4;
+  --color-indigo-500: #a3a3a3;
+  --color-indigo-600: #525252;
+  --color-indigo-700: #404040;
+
+  --color-cyan-300: #e5e5e5;
+  --color-cyan-400: #d4d4d4;
+  --color-cyan-500: #a3a3a3;
+  --color-cyan-600: #525252;
+
+  --color-violet-300: #e5e5e5;
+  --color-violet-400: #d4d4d4;
+  --color-violet-500: #a3a3a3;
+  --color-violet-600: #525252;
+
+  --color-purple-300: #e5e5e5;
+  --color-purple-400: #d4d4d4;
+  --color-purple-500: #a3a3a3;
+  --color-purple-600: #525252;
+
+  /* ----------------------------------------------------------------------
+     Semantic feedback hues are kept CHROMATIC on purpose: success = green,
+     warning = amber, danger = red. Everything else stays monochrome, so the
+     only color in the UI is meaningful status feedback (banners, toasts,
+     validation, status badges).
+     ------------------------------------------------------------------- */
+
+  /* --- Success (emerald / green) → green --- */
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+
+  /* teal is decorative (not a status) → keep neutral */
+  --color-teal-300: #e5e5e5;
+  --color-teal-400: #d4d4d4;
+  --color-teal-500: #a3a3a3;
+  --color-teal-600: #525252;
+
+  /* --- Warning (amber / yellow) → amber --- */
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+
+  --color-yellow-300: #fde047;
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
+
+  /* orange is decorative (not a status) → keep neutral */
+  --color-orange-300: #d4d4d4;
+  --color-orange-400: #a3a3a3;
+  --color-orange-500: #737373;
+  --color-orange-600: #525252;
+
+  /* --- Danger (rose / red) → red --- */
+  --color-rose-300: #fda4af;
+  --color-rose-400: #fb7185;
+  --color-rose-500: #f43f5e;
+  --color-rose-600: #e11d48;
+  --color-rose-700: #be123c;
+
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+
+  /* pink is decorative (not a status) → keep neutral */
+  --color-pink-300: #e5e5e5;
+  --color-pink-400: #d4d4d4;
+  --color-pink-500: #a3a3a3;
+  --color-pink-600: #404040;
+}
+
+/* Design tokens for the custom glass / brand primitives below. */
 @layer base {
   :root {
-    --bg-primary: #0B1120;   /* deep navy — page ground */
-    --bg-surface: #131C2E;   /* slate — sections / inputs */
-    --bg-card: #1B2942;      /* raised cards */
-    --border-glass: rgba(148, 163, 184, 0.12);
+    --bg-primary: #0a0a0a;   /* near-black — page ground */
+    --bg-surface: #141414;   /* raised surface / inputs */
+    --bg-card: #171717;      /* raised cards */
+    --border-glass: rgba(255, 255, 255, 0.08);
 
-    --text-primary: #F8FAFC;
-    --text-secondary: #94A3B8;
-    --text-muted: #64748B;
+    --text-primary: #fafafa;
+    --text-secondary: #a3a3a3;
+    --text-muted: #737373;
 
-    --accent: #3B82F6;       /* electric blue */
-    --accent-strong: #2563EB;
-    --accent-soft: #60A5FA;
+    --accent: #fafafa;       /* the accent is light — contrast, not color */
+    --accent-strong: #ffffff;
+    --accent-soft: #d4d4d4;
   }
 
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: var(--font-sans);
     overflow-x: hidden;
     min-height: 100vh;
   }
 }
 
-/* Glassmorphism primitives */
+/* Glassmorphism primitives — subtle, neutral, professional */
 .glass-card {
-  background: rgba(27, 41, 66, 0.65);
+  background: rgba(23, 23, 23, 0.55);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-glass);
@@ -43,57 +214,60 @@
 }
 
 .glass-card-hover:hover {
-  background: rgba(27, 41, 66, 0.85);
-  border-color: rgba(59, 130, 246, 0.45);
+  background: rgba(38, 38, 38, 0.7);
+  border-color: rgba(255, 255, 255, 0.18);
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px -10px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 14px 34px -14px rgba(0, 0, 0, 0.7);
 }
 
 .glass-panel {
-  background: rgba(11, 17, 32, 0.85);
+  background: rgba(10, 10, 10, 0.72);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-glass);
 }
 
 .glass-input {
-  background: rgba(11, 17, 32, 0.55);
-  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--text-primary);
   transition: all 0.2s ease;
 }
 
 .glass-input:focus {
-  border-color: var(--accent);
-  background: rgba(11, 17, 32, 0.9);
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.06);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
 }
 
-/* Monochrome-blue brand gradient (replaces the old blue/cyan/indigo rainbow) */
+/* Monochrome "gradient" text — a soft silver sheen, still black & white */
 .text-gradient {
-  background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #d4d4d4 45%, #8a8a8a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 50%, #F59E0B 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #d4d4d4 50%, #8a8a8a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Primary button — solid white on black text for a crisp, premium CTA */
 .btn-gradient {
-  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
-  color: #ffffff;
+  background: #fafafa;
+  color: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.9);
   transition: all 0.2s ease;
 }
 
 .btn-gradient:hover {
-  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+  background: #ffffff;
+  box-shadow: 0 8px 26px -8px rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }
 
 /* Utility: hide scrollbar on horizontal chip rows */
@@ -111,12 +285,12 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B1120;
+  background: #0a0a0a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #404040;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #525252;
 }
