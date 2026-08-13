@@ -58,7 +58,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   if (loading || !admin) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a]">
-        <Spinner className="h-8 w-8 text-blue-500" />
+        <Spinner className="h-8 w-8 text-neutral-300" />
       </div>
     );
   }

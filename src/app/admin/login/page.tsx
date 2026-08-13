@@ -38,7 +38,7 @@ export default function AdminLoginPage() {
   if (loading || admin) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a]">
-        <Spinner className="h-8 w-8 text-blue-500" />
+        <Spinner className="h-8 w-8 text-neutral-300" />
       </div>
     );
   }
@@ -46,21 +46,21 @@ export default function AdminLoginPage() {
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0a0a0a] px-4 py-12">
       {/* ambient glows */}
-      <div className="pointer-events-none absolute -left-32 -top-40 h-96 w-96 rounded-full bg-blue-600/20 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 -right-32 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-32 -top-40 h-96 w-96 rounded-full bg-white/[0.06] blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 -right-32 h-96 w-96 rounded-full bg-white/[0.03] blur-3xl" />
 
       <div className="relative w-full max-w-md">
         <Link
           href="/"
-          className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-blue-400"
+          className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-white"
         >
           <ArrowLeft className="h-4 w-4" /> Back to site
         </Link>
 
         <div className="glass-panel rounded-3xl border border-slate-700/60 p-8 shadow-2xl">
           <div className="mb-8 flex flex-col items-center text-center">
-            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 shadow-lg shadow-blue-600/30">
-              <Car className="h-7 w-7 text-white" />
+            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-neutral-100 to-neutral-400 shadow-lg shadow-black/40">
+              <Car className="h-7 w-7 text-neutral-950" />
             </div>
             <h1 className="text-2xl font-black tracking-tight text-white">Admin Portal</h1>
             <p className="mt-1 text-sm text-slate-400">Sign in to manage the Lumen fleet</p>

@@ -2,11 +2,12 @@
 
 /*
   Lumen — "Monochrome · Premium"
-  A strictly black & white design system. No chromatic accents.
-  Every hue in the app is remapped to a neutral grayscale ramp below, so the
-  existing markup (which references blue/emerald/amber/rose/slate classes) is
-  rendered in a cohesive black-and-white palette without structural changes.
-  Emphasis is carried by contrast, weight, translucency and subtle glass — not color.
+  A black & white design system where the ONLY color is meaningful status
+  feedback: success = green, warning = amber, danger = red. The brand and all
+  decorative hues (blue/sky/indigo/cyan/violet/purple/teal/pink/orange) are
+  remapped to a neutral grayscale ramp below, so the existing markup renders in
+  a cohesive palette without structural changes. Emphasis is carried by
+  contrast, weight, translucency and subtle glass — color is reserved for state.
 */
 
 @theme {
@@ -110,54 +111,64 @@
   --color-purple-500: #a3a3a3;
   --color-purple-600: #525252;
 
-  /* --- Positive hue (emerald, green, teal) → bright neutral --- */
-  --color-emerald-300: #e5e5e5;
-  --color-emerald-400: #d4d4d4;
-  --color-emerald-500: #a3a3a3;
-  --color-emerald-600: #525252;
-  --color-emerald-700: #404040;
+  /* ----------------------------------------------------------------------
+     Semantic feedback hues are kept CHROMATIC on purpose: success = green,
+     warning = amber, danger = red. Everything else stays monochrome, so the
+     only color in the UI is meaningful status feedback (banners, toasts,
+     validation, status badges).
+     ------------------------------------------------------------------- */
 
-  --color-green-300: #e5e5e5;
-  --color-green-400: #d4d4d4;
-  --color-green-500: #a3a3a3;
-  --color-green-600: #525252;
-  --color-green-700: #404040;
+  /* --- Success (emerald / green) → green --- */
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
 
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+
+  /* teal is decorative (not a status) → keep neutral */
   --color-teal-300: #e5e5e5;
   --color-teal-400: #d4d4d4;
   --color-teal-500: #a3a3a3;
   --color-teal-600: #525252;
 
-  /* --- Warning hue (amber, yellow, orange) → muted mid-gray --- */
-  --color-amber-300: #d4d4d4;
-  --color-amber-400: #a3a3a3;
-  --color-amber-500: #737373;
-  --color-amber-600: #525252;
-  --color-amber-700: #404040;
+  /* --- Warning (amber / yellow) → amber --- */
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
 
-  --color-yellow-300: #d4d4d4;
-  --color-yellow-400: #a3a3a3;
-  --color-yellow-500: #737373;
-  --color-yellow-600: #525252;
+  --color-yellow-300: #fde047;
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
 
+  /* orange is decorative (not a status) → keep neutral */
   --color-orange-300: #d4d4d4;
   --color-orange-400: #a3a3a3;
   --color-orange-500: #737373;
   --color-orange-600: #525252;
 
-  /* --- Danger hue (rose, red, pink) → neutral, distinguished by strong fills --- */
-  --color-rose-300: #e5e5e5;
-  --color-rose-400: #d4d4d4;
-  --color-rose-500: #a3a3a3;
-  --color-rose-600: #404040;
-  --color-rose-700: #262626;
+  /* --- Danger (rose / red) → red --- */
+  --color-rose-300: #fda4af;
+  --color-rose-400: #fb7185;
+  --color-rose-500: #f43f5e;
+  --color-rose-600: #e11d48;
+  --color-rose-700: #be123c;
 
-  --color-red-300: #e5e5e5;
-  --color-red-400: #d4d4d4;
-  --color-red-500: #a3a3a3;
-  --color-red-600: #404040;
-  --color-red-700: #262626;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
 
+  /* pink is decorative (not a status) → keep neutral */
   --color-pink-300: #e5e5e5;
   --color-pink-400: #d4d4d4;
   --color-pink-500: #a3a3a3;
