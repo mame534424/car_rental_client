@@ -163,7 +163,7 @@ export function Modal({
         role="dialog"
         aria-modal="true"
         className={cn(
-          'relative z-10 my-8 w-full rounded-2xl border border-slate-700/70 bg-[#131C2E] shadow-2xl shadow-black/50',
+          'relative z-10 my-8 w-full rounded-2xl border border-slate-700/70 bg-[#171717] shadow-2xl shadow-black/50',
           maxW
         )}
       >

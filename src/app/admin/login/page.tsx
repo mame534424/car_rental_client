@@ -37,14 +37,14 @@ export default function AdminLoginPage() {
   // Brief hold while we confirm whether a session already exists.
   if (loading || admin) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#0B1120]">
+      <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a]">
         <Spinner className="h-8 w-8 text-blue-500" />
       </div>
     );
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0B1120] px-4 py-12">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0a0a0a] px-4 py-12">
       {/* ambient glows */}
       <div className="pointer-events-none absolute -left-32 -top-40 h-96 w-96 rounded-full bg-blue-600/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-40 -right-32 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl" />
