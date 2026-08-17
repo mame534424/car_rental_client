@@ -31,6 +31,7 @@ import {
   Loader2,
   Lock,
 } from 'lucide-react';
+import Toast from '@/components/common/Toast';
 
 function BookingWizardContent() {
   const router = useRouter();
@@ -777,6 +778,7 @@ function BookingWizardContent() {
                 />
 
                 {receiptError && <p className="text-xs text-rose-400 mt-2">{receiptError}</p>}
+                {/* Inline message kept for accessibility; primary feedback shown via toast */}
                 {receiptSuccess && <p className="text-xs text-emerald-400 mt-2">{receiptSuccess}</p>}
 
                 <div className="pt-4">
@@ -794,6 +796,9 @@ function BookingWizardContent() {
             </div>
           </div>
         )}
+
+        {/* Global toast for receipt submission */}
+        <Toast message={receiptSuccess} show={!!receiptSuccess} durationMs={1500} />
 
         {/* Right Col: Selected Car Summary Card */}
         <div className="space-y-6">
