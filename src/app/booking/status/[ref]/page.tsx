@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, use } from 'react';
 import Link from 'next/link';
-import { verifyPayment } from '@/lib/api/payments';
 import { PaymentRecord, BookingStatus } from '@/types/booking';
 import { Badge } from '@/components/common/Badge';
 import { formatCurrency, formatDate } from '@/lib/utils';
@@ -35,30 +34,12 @@ export default function PaymentStatusPage({ params }: PaymentStatusPageProps) {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  // Trigger payment verification on mount or user action
-  const handleVerify = async () => {
-    try {
-      setVerifying(true);
-      setError(null);
-      const res = await verifyPayment(ref);
-      setPayment(res);
-
-      if (res.status === 'PAID') {
-        setBookingStatus('PENDING_VERIFICATION');
-      } else {
-        setBookingStatus('PENDING_PAYMENT');
-      }
-    } catch (err: any) {
-      console.error('Payment verification failed:', err);
-      setError(err.message || 'Payment verification failed');
-    } finally {
-      setLoading(false);
-      setVerifying(false);
-    }
-  };
-
+  // Old automatic payment verification via Chapa is removed.
+  // This page now only displays a simple status notice if reached.
   useEffect(() => {
-    handleVerify();
+    setLoading(false);
+    setError(null);
+    setVerifying(false);
   }, [ref]);
 
   const copyRefToClipboard = () => {
@@ -71,8 +52,8 @@ export default function PaymentStatusPage({ params }: PaymentStatusPageProps) {
     return (
       <div className="max-w-xl mx-auto px-4 py-24 text-center space-y-4">
         <Loader2 className="w-12 h-12 text-blue-400 animate-spin mx-auto" />
-        <h2 className="text-xl font-bold text-white">Verifying Transaction Status...</h2>
-        <p className="text-xs text-slate-400">Connecting to Chapa payment processor.</p>
+        <h2 className="text-xl font-bold text-white">Checking Booking Status...</h2>
+        <p className="text-xs text-slate-400">Fetching latest booking information.</p>
       </div>
     );
   }
@@ -109,11 +90,11 @@ export default function PaymentStatusPage({ params }: PaymentStatusPageProps) {
               <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">
                 Awaiting Payment Completion
               </span>
-              <h1 className="text-3xl font-black text-white">Complete Chapa Checkout</h1>
+              <h1 className="text-3xl font-black text-white">Complete Payment</h1>
             </div>
             <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
-              Click below to complete or simulate the payment transaction with Chapa.
-            </p>
+                  This flow was replaced by a manual receipt upload flow. After creating a booking, upload your payment screenshot on the booking page.
+                </p>
           </div>
         )}
 
@@ -144,23 +125,7 @@ export default function PaymentStatusPage({ params }: PaymentStatusPageProps) {
         {/* Simulated Chapa Payment Action if not yet paid */}
         {!isPaid && (
           <div className="pt-2">
-            <button
-              onClick={handleVerify}
-              disabled={verifying}
-              className="btn-gradient px-8 py-3.5 rounded-xl font-bold text-sm shadow-xl inline-flex items-center gap-2 cursor-pointer disabled:opacity-50"
-            >
-              {verifying ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Processing Payment...</span>
-                </>
-              ) : (
-                <>
-                  <CreditCard className="w-4 h-4" />
-                  <span>Simulate Successful Chapa Payment</span>
-                </>
-              )}
-            </button>
+            <div className="text-xs text-slate-300">Automatic Chapa simulation removed. Use the booking page to upload a receipt.</div>
           </div>
         )}
       </div>

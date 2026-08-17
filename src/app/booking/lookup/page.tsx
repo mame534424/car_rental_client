@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { verifyPayment } from '@/lib/api/payments';
+// verifyPayment removed — lookup now guides users to upload receipts after booking
 import { PaymentRecord, BookingStatus } from '@/types/booking';
 import { Badge } from '@/components/common/Badge';
 import { formatCurrency, formatDate } from '@/lib/utils';
@@ -30,20 +30,11 @@ export default function BookingLookupPage() {
     e.preventDefault();
     if (!txRefInput.trim()) return;
 
-    try {
-      setLoading(true);
-      setError(null);
-      setSearched(true);
-      setPaymentResult(null);
-
-      const res = await verifyPayment(txRefInput.trim());
-      setPaymentResult(res);
-    } catch (err: any) {
-      console.error('Lookup error:', err);
-      setError(err.message || 'No reservation found matching this reference');
-    } finally {
-      setLoading(false);
-    }
+    // The previous Chapa transaction lookup is no longer supported.
+    // Guide users to the booking page to upload payment receipts using their booking ID.
+    setSearched(true);
+    setPaymentResult(null);
+    setError('Transaction lookup is no longer supported. Please upload your receipt on the booking confirmation page using your Booking ID.');
   };
 
   return (
@@ -57,7 +48,7 @@ export default function BookingLookupPage() {
           Check Your <span className="text-gradient">Booking Status</span>
         </h1>
         <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
-          Enter your Chapa Transaction Reference (e.g. <code className="text-blue-300 font-mono bg-slate-900 px-1.5 py-0.5 rounded">chapa-mock-...</code>) to check live status.
+          Enter your Booking ID to check the current reservation status, or go to the booking confirmation page to upload a payment receipt.
         </p>
       </div>
 
@@ -68,7 +59,7 @@ export default function BookingLookupPage() {
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Enter transaction reference (e.g. chapa-mock-...)"
+              placeholder="Enter Booking ID (e.g. booking-abc123)"
               value={txRefInput}
               onChange={(e) => setTxRefInput(e.target.value)}
               className="w-full glass-input rounded-xl pl-10 pr-4 py-3 text-sm font-mono focus:ring-2 focus:ring-blue-500"

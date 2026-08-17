@@ -94,7 +94,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <Car className="h-5 w-5 text-white" />
       </div>
       <div className="leading-tight">
-        <span className="block text-sm font-bold text-white">Lumen Admin</span>
+        <span className="block text-sm font-bold text-white">Ranzi Admin</span>
         <span className="block text-[10px] uppercase tracking-wider text-slate-500">Fleet Console</span>
       </div>
     </Link>

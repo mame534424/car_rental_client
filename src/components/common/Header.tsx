@@ -30,7 +30,7 @@ export function Header() {
             </div>
             <div>
               <span className="text-xl font-bold tracking-tight text-white flex items-center gap-1">
-                Lumen <span className="text-gradient font-black">Rentals</span>
+                Ranzi <span className="text-gradient font-black">Rentals</span>
               </span>
               <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase block -mt-1">
                 Addis Ababa • Ethiopia

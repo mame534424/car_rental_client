@@ -216,7 +216,7 @@ function CarDetailContent({ params }: CarDetailPageProps) {
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Chapa Mobile Banking Payment option</span>
+                <span>Mobile Money payment option (manual receipt)</span>
               </li>
             </ul>
           </div>
@@ -310,7 +310,7 @@ function CarDetailContent({ params }: CarDetailPageProps) {
 
             <div className="text-center text-[11px] text-slate-400 flex items-center justify-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-              <span>Includes instant document upload & Chapa checkout</span>
+              <span>Includes instant document upload & manual receipt submission</span>
             </div>
           </div>
         </div>

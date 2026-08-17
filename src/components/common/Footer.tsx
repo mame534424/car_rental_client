@@ -22,11 +22,11 @@ export function Footer() {
                 <Car className="w-5 h-5" />
               </div>
               <span className="text-lg font-bold text-white tracking-tight">
-                Lumen <span className="text-gradient">Rentals</span>
+                Ranzi <span className="text-gradient">Rentals</span>
               </span>
             </div>
             <p className="text-sm leading-relaxed text-slate-400">
-              Premium, reliable car rental service operating in Addis Ababa. Guaranteed transparent pricing, online reservations, and instant customer verification.
+              Premium, reliable car rental service operating in Addis Ababa. Guaranteed transparent pricing, online reservations, and manual receipt uploads for payment verification.
             </p>
             <div className="flex items-center gap-2 text-xs text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20 w-fit">
               <ShieldCheck className="w-4 h-4" /> Verified Direct Fleet Operator
@@ -63,7 +63,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-blue-400 shrink-0" />
-                <span>support@lumenrentals.et</span>
+                <span>support@ranzi.et</span>
               </li>
               <li className="flex items-center gap-3">
                 <Clock className="w-4 h-4 text-blue-400 shrink-0" />
@@ -84,9 +84,9 @@ export function Footer() {
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>Fully Insured & Maintained Vehicles</span>
               </li>
-              <li className="flex items-center gap-2">
+                <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Online Chapa Payment Support</span>
+                <span>Manual Receipt Payment Support</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -97,7 +97,7 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-800/60 text-xs text-center text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} Lumen Car Rental System. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Ranzi Car Rental System. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link
               href="/admin/login"
@@ -110,6 +110,7 @@ export function Footer() {
             <p className="text-slate-500 font-mono">API v1.0.0</p>
           </div>
         </div>
+        <div className="text-center text-xs text-slate-500 pt-4">Made by lumen labs</div>
       </div>
     </footer>
   );

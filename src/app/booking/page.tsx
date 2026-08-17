@@ -6,7 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getCars } from '@/lib/api/cars';
 import { createBooking } from '@/lib/api/bookings';
-import { createCheckout } from '@/lib/api/payments';
+import { submitReceipt } from '@/lib/api/payments';
+import { Booking } from '@/types/booking';
 import { Car } from '@/types/car';
 import { IdentificationType } from '@/types/booking';
 import { bookingFormSchema, BookingFormValues } from '@/schemas/booking.schema';
@@ -76,6 +77,11 @@ function BookingWizardContent() {
   const [stepErrors, setStepErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const [createdBooking, setCreatedBooking] = useState<Booking | null>(null);
+  const [receiptFileToUpload, setReceiptFileToUpload] = useState<File | null>(null);
+  const [receiptSubmitting, setReceiptSubmitting] = useState(false);
+  const [receiptSuccess, setReceiptSuccess] = useState<string | null>(null);
+  const [receiptError, setReceiptError] = useState<string | null>(null);
 
   function formatInputDateTime(d: Date) {
     const pad = (n: number) => n.toString().padStart(2, '0');
@@ -235,11 +241,10 @@ function BookingWizardContent() {
         identificationDocument: idDocumentFile,
       });
 
-      // 2. Initialize Payment Checkout via `/api/payments/checkout`
-      const checkout = await createCheckout(booking.id);
-
-      // 3. Redirect customer to payment status gate
-      router.push(`/booking/status/${encodeURIComponent(checkout.transactionReference)}`);
+      // 2. Set created booking and show submission instructions for manual receipt upload
+      setCreatedBooking(booking);
+      // show a welcome toast and keep user on page to upload receipt
+      setReceiptSuccess('Reservation created. Please upload your payment receipt below. You will be notified via email or SMS when admin verifies.');
     } catch (err: any) {
       console.error('Booking submission failed:', err);
       setServerError(getErrorMessage(err));
@@ -248,6 +253,48 @@ function BookingWizardContent() {
     }
   };
 
+
+  // Receipt upload handlers (manual transfer flow)
+  const onReceiptFileChange = (file: File | null) => {
+    if (!file) return;
+    // Limit size to 5MB
+    if (file.size > 5 * 1024 * 1024) {
+      setReceiptError('Receipt file exceeds 5MB limit');
+      return;
+    }
+    setReceiptError(null);
+    setReceiptFileToUpload(file);
+  };
+
+  const handleSubmitReceipt = async () => {
+    if (!createdBooking) return;
+    if (!receiptFileToUpload) {
+      setReceiptError('Please choose a receipt image or PDF to upload');
+      return;
+    }
+
+    try {
+      setReceiptSubmitting(true);
+      setReceiptError(null);
+      const res = await submitReceipt(createdBooking.id, receiptFileToUpload);
+      setReceiptSuccess('Receipt submitted successfully. You will be notified via email or SMS once admin verifies.');
+      // clear file after successful submit
+      setReceiptFileToUpload(null);
+      // show toast briefly then redirect to home
+      setTimeout(() => {
+        try {
+          router.push('/');
+        } catch (e) {
+          console.error('Redirect failed', e);
+        }
+      }, 1500);
+    } catch (err: any) {
+      console.error('Receipt upload failed', err);
+      setReceiptError(err.message || 'Receipt upload failed');
+    } finally {
+      setReceiptSubmitting(false);
+    }
+  };
   const rentalDays = calculateRentalDays(formData.pickupDate || '', formData.returnDate || '');
   const totalPrice = selectedCar
     ? calculateTotalPrice(selectedCar.pricePerDay, formData.pickupDate || '', formData.returnDate || '')
@@ -600,14 +647,44 @@ function BookingWizardContent() {
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-300 space-y-2">
+                <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-300 space-y-3">
                   <div className="font-bold text-white text-sm flex items-center gap-2">
                     <CreditCard className="w-4 h-4 text-blue-400" />
-                    Integrated Payment Flow
+                    Payment Instructions
                   </div>
-                  <p className="leading-relaxed">
-                    Submitting this form creates a reservation with status <strong className="text-amber-300">PENDING_PAYMENT</strong> and launches the Chapa payment verification gate.
+                  <p className="leading-relaxed text-xs text-slate-300">
+                    After confirming the reservation, transfer the total amount to one of our accounts below and upload a screenshot of your payment on the next step. Admin will verify and confirm your booking via email or SMS.
                   </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-800 text-xs">
+                      <div className="text-[11px] text-slate-400">Telebir (Mobile Money)</div>
+                      <div className="font-bold text-white mt-1">0963524178</div>
+                    </div>
+                    <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-800 text-xs">
+                      <div className="text-[11px] text-slate-400">CBE Bank (Account)</div>
+                      <div className="font-bold text-white mt-1">78451278895623</div>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 flex flex-col sm:flex-row items-center gap-3">
+                    <a
+                      href={`https://wa.me/251963524178?text=${encodeURIComponent('Hello, I would like to make a payment inquiry')}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 btn-gradient px-4 py-2 rounded-xl text-sm font-semibold"
+                    >
+                      <Phone className="w-4 h-4" /> Contact via WhatsApp
+                    </a>
+
+                    <button
+                      type="button"
+                      onClick={() => window.open('tel:+251963524178')}
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm font-semibold"
+                    >
+                      <Phone className="w-4 h-4" /> Call/Make Payment
+                    </button>
+                  </div>
                 </div>
 
                 {serverError && (
@@ -664,6 +741,59 @@ function BookingWizardContent() {
             )}
           </div>
         </div>
+
+        {/* If booking was just created, show manual payment instructions & receipt upload */}
+        {createdBooking && (
+          <div className="lg:col-span-2 mt-6">
+            <div className="glass-panel p-6 rounded-3xl space-y-4 border border-slate-800">
+              <h3 className="text-sm font-bold text-white">Payment Instructions & Receipt Upload</h3>
+
+              <p className="text-xs text-slate-300">
+                Your reservation was created with ID <strong className="font-mono text-blue-300">{createdBooking.id}</strong>.
+                Please transfer the total amount to one of our accounts below and upload the payment receipt screenshot here.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                  <div className="text-[11px] text-slate-400">Telebir (Mobile Money)</div>
+                  <div className="font-bold text-white mt-1">0963524178</div>
+                    <div className="text-[11px] text-slate-400 mt-1">Account Holder: Ranzi Car Rental</div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                  <div className="text-[11px] text-slate-400">CBE Bank (Account)</div>
+                  <div className="font-bold text-white mt-1">78451278895623</div>
+                  <div className="text-[11px] text-slate-400 mt-1">Account Name: Ranzi Car Rental</div>
+                </div>
+              </div>
+
+              <div className="pt-3">
+                <label className="block text-xs text-slate-300 mb-2">Upload payment receipt (PNG, JPG or PDF — max 5MB)</label>
+                <input
+                  type="file"
+                  accept="image/*,application/pdf"
+                  onChange={(e) => onReceiptFileChange(e.target.files ? e.target.files[0] : null)}
+                  className="w-full text-xs"
+                />
+
+                {receiptError && <p className="text-xs text-rose-400 mt-2">{receiptError}</p>}
+                {receiptSuccess && <p className="text-xs text-emerald-400 mt-2">{receiptSuccess}</p>}
+
+                <div className="pt-4">
+                  <button
+                    onClick={handleSubmitReceipt}
+                    disabled={receiptSubmitting}
+                    className="btn-gradient px-6 py-2.5 rounded-xl font-bold text-xs shadow-lg disabled:opacity-50"
+                  >
+                    {receiptSubmitting ? 'Uploading...' : 'Submit Receipt & Notify Admin'}
+                  </button>
+                </div>
+
+                <p className="text-[11px] text-slate-400 mt-3">After you upload the receipt, you will be notified via email or SMS when admin verifies the payment.</p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Right Col: Selected Car Summary Card */}
         <div className="space-y-6">

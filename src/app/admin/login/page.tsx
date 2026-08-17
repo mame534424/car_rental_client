@@ -63,7 +63,7 @@ export default function AdminLoginPage() {
               <Car className="h-7 w-7 text-neutral-950" />
             </div>
             <h1 className="text-2xl font-black tracking-tight text-white">Admin Portal</h1>
-            <p className="mt-1 text-sm text-slate-400">Sign in to manage the Lumen fleet</p>
+            <p className="mt-1 text-sm text-slate-400">Sign in to manage the Ranzi fleet</p>
           </div>
 
           {error && (
@@ -83,7 +83,7 @@ export default function AdminLoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@lumen.com"
+                  placeholder="admin@ranzi.et"
                   className="pl-10"
                 />
               </div>

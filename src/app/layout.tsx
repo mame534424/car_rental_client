@@ -8,15 +8,15 @@ const geistSans = Geist({ subsets: ['latin'], variable: '--font-geist-sans' });
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' });
 
 export const metadata: Metadata = {
-  title: 'Lumen Car Rental — Premium Vehicle Rentals in Addis Ababa',
+  title: 'Ranzi Car Rental — Premium Vehicle Rentals in Addis Ababa',
   description:
-    'Book premium rental cars in Addis Ababa, Ethiopia. Easy online booking, instant Chapa payment, transparent pricing, and 24/7 airport pickup.',
+    'Book premium rental cars in Addis Ababa, Ethiopia. Easy online booking, manual receipt-based payment verification, transparent pricing, and 24/7 airport pickup.',
   keywords: [
     'Car Rental Addis Ababa',
     'Ethiopia Car Rental',
     'Rent a Car Bole Airport',
-    'Lumen Rentals',
-    'Chapa Payment Rental',
+    'Ranzi Rentals',
+    'Receipt Payment Rental',
   ],
 };
 

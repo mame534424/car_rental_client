@@ -58,12 +58,12 @@ export default function HomePage() {
 
           {/* Hero Headlines */}
           <div className="text-center space-y-4 max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
+              <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
               Drive with Confidence in Ethiopia with{' '}
-              <span className="text-gradient">Lumen Rentals</span>
+              <span className="text-gradient">Ranzi Rentals</span>
             </h1>
             <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-              Rent verified SUVs, sedans, and compact vehicles instantly. Transparent daily pricing, instant Chapa checkout, and airport pickup.
+              Rent verified SUVs, sedans, and compact vehicles. Transparent daily pricing, manual receipt-based payment verification, and airport pickup.
             </p>
           </div>
 
@@ -89,8 +89,8 @@ export default function HomePage() {
               <div className="text-xs text-slate-400 font-medium">Bole Airport Pickup</div>
             </div>
             <div className="space-y-1">
-              <div className="text-2xl font-black text-white">Chapa</div>
-              <div className="text-xs text-slate-400 font-medium">Supported Checkout</div>
+              <div className="text-2xl font-black text-white">Manual</div>
+              <div className="text-xs text-slate-400 font-medium">Receipt Upload Payment</div>
             </div>
           </div>
         </div>
@@ -199,7 +199,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Choose Lumen Banner */}
+      {/* Why Choose Ranzi Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="glass-panel rounded-3xl p-8 sm:p-12 relative overflow-hidden border border-blue-500/20 shadow-2xl">
           <div className="absolute right-0 bottom-0 w-96 h-96 bg-blue-600/10 blur-[100px] rounded-full pointer-events-none" />
@@ -210,7 +210,7 @@ export default function HomePage() {
                 <ShieldCheck className="w-4 h-4" /> Trusted Local Operator
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-snug">
-                Why Thousands Choose <span className="text-gradient">Lumen Rentals</span>
+                Why Thousands Choose <span className="text-gradient">Ranzi Rentals</span>
               </h2>
               <p className="text-sm text-slate-300 leading-relaxed">
                 Whether you need a reliable SUV for upcountry travel or a sleek sedan for business meetings in Addis Ababa, our direct rental system delivers unmatched transparency.
@@ -227,7 +227,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center gap-3 text-sm text-slate-200">
                   <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
-                  <span>Integrated Chapa online payment verification</span>
+                    <span>Manual receipt submission with admin verification</span>
                 </div>
               </div>
 
